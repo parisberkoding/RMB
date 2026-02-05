@@ -196,6 +196,11 @@
             transform: translate(-50%, -50%);
             display: none;
             animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 999; /* Ensure button is on top */
+        }
+
+        #start-button.visible {
+            display: block !important;
         }
 
         @keyframes scaleIn {
@@ -711,6 +716,20 @@
                 // Cache DOM elements
                 this.cacheElements();
                 
+                // Wait for A-Frame scene to fully load before setting up events
+                const scene = document.querySelector('a-scene');
+                if (scene.hasLoaded) {
+                    this.onSceneLoaded();
+                } else {
+                    scene.addEventListener('loaded', () => {
+                        this.onSceneLoaded();
+                    });
+                }
+            },
+
+            onSceneLoaded() {
+                console.log('✅ A-Frame scene loaded');
+                
                 // Initialize state
                 this.state.totalScenes = window.SCENE_CONFIG.length;
                 this.elements.totalScenesText.textContent = this.state.totalScenes;
@@ -756,16 +775,37 @@
             // SETUP EVENT LISTENERS
             // ----------------------------------------------------------------
             setupEventListeners() {
-                // Marker events
+            // Marker events - Multiple detection methods for better compatibility
+            if (this.elements.marker) {
+                // Method 1: Standard AR.js events
+                this.elements.marker.addEventListener('markerFound', () => {
+                    console.log('🎯 Marker found (event)');
+                    this.onMarkerFound();
+                });
+                
+                this.elements.marker.addEventListener('markerLost', () => {
+                    console.log('❌ Marker lost (event)');
+                    this.onMarkerLost();
+                });
+            }
+            
+            // Method 2: Polling fallback (check marker visibility every 500ms)
+            this.markerCheckInterval = setInterval(() => {
                 if (this.elements.marker) {
-                    this.elements.marker.addEventListener('markerFound', () => {
-                        this.onMarkerFound();
-                    });
+                    const isVisible = this.elements.marker.object3D.visible;
                     
-                    this.elements.marker.addEventListener('markerLost', () => {
+                    // Marker just became visible
+                    if (isVisible && !this.state.markerFound) {
+                        console.log('🎯 Marker found (polling)');
+                        this.onMarkerFound();
+                    }
+                    // Marker just became hidden
+                    else if (!isVisible && this.state.markerFound) {
+                        console.log('❌ Marker lost (polling)');
                         this.onMarkerLost();
-                    });
+                    }
                 }
+            }, 500);
                 
                 // Start button
                 const startBtn = this.elements.startButton.querySelector('.btn-start');
@@ -792,16 +832,20 @@
             // ----------------------------------------------------------------
             // MARKER FOUND EVENT
             // ----------------------------------------------------------------
-            onMarkerFound() {
+           onMarkerFound() {
                 console.log('🎯 Marker detected');
                 this.state.markerFound = true;
                 
-                // Hide scanner instructions
+                // Hide scanner instructions immediately
                 this.elements.scannerInstructions.classList.remove('visible');
                 
-                // Show start button if simulation not started
+                // Force show start button if simulation not started
                 if (!this.state.simulationStarted) {
-                    this.elements.startButton.classList.add('visible');
+                    // Add small delay to ensure smooth transition
+                    setTimeout(() => {
+                        this.elements.startButton.classList.add('visible');
+                        this.elements.startButton.style.display = 'block';
+                    }, 300);
                 } else {
                     // Show controls if simulation already started
                     this.elements.statusBar.classList.add('visible');
@@ -1080,11 +1124,21 @@
         // ----------------------------------------------------------------
         // AUTO-INITIALIZE ON DOM READY
         // ----------------------------------------------------------------
-        document.addEventListener('DOMContentLoaded', () => {
-            // Wait for scene-config.js to load
+       document.addEventListener('DOMContentLoaded', () => {
+            // Wait for scene-config.js and A-Frame to load
             setTimeout(() => {
                 ARController.init();
-            }, 100);
+            }, 500);
+        });
+
+        // Also try initializing on window load as fallback
+        window.addEventListener('load', () => {
+            if (!ARController.state.markerFound) {
+                console.log('🔄 Reinitializing from window.load');
+                setTimeout(() => {
+                    ARController.init();
+                }, 300);
+            }
         });
     </script>
 </body>
