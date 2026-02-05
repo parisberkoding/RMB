@@ -1,93 +1,125 @@
-AR-Geothermal: Pengalaman Realitas Augmented untuk Edukasi Energi Panas Bumi
-Apa Itu AR-Geothermal?
-AR-Geothermal adalah aplikasi Realitas Augmented (AR) yang dirancang untuk mengedukasi pengguna tentang energi panas bumi. Dengan teknologi AR berbasis web, aplikasi ini memvisualisasikan proses pembangkitan listrik dari panas bumi secara interaktif dalam 3 dimensi.
+# 🌋 AR-Geothermal
 
-Fitur Utama
-Aplikasi ini menampilkan 5 scene AR yang berbeda:
+**Pengalaman Realitas Augmented untuk Edukasi Energi Panas Bumi**
 
-Scene 1: Perkenalan - Gambaran umum pembangkit panas bumi
+AR-Geothermal adalah aplikasi **Realitas Augmented (AR) berbasis web** yang dirancang untuk membantu pengguna memahami konsep dan proses **energi panas bumi (geothermal)** secara interaktif melalui visualisasi 3D.
 
-Scene 2: Lapisan Bumi - Fokus pada sumber panas dari perut bumi
+Aplikasi ini memanfaatkan teknologi WebAR untuk menampilkan tahapan pembangkitan listrik panas bumi langsung di lingkungan nyata pengguna, tanpa perlu instalasi aplikasi tambahan.
 
-Scene 3: Turbin - Menampilkan turbin berputar dengan animasi
+---
 
-Scene 4: Menara Pendingin - Sistem pendinginan dan kondensasi
+## 📌 Apa Itu AR-Geothermal?
 
-Scene 5: Penutup - Pandangan lengkap dengan pesan keberlanjutan
+AR-Geothermal memvisualisasikan proses pembangkitan listrik dari panas bumi menggunakan model 3D dan animasi interaktif. Pengguna dapat menjelajahi setiap tahap proses melalui beberapa scene AR yang disertai narasi edukatif singkat.
+
+Aplikasi ini dirancang sebagai media pembelajaran yang **ringan, informatif, dan mudah diakses** melalui browser modern.
+
+---
+
+## ✨ Fitur Utama
+
+Aplikasi terdiri dari **5 scene AR utama**:
+
+1. **Scene 1 – Perkenalan**
+   Gambaran umum pembangkit listrik tenaga panas bumi.
+
+2. **Scene 2 – Lapisan Bumi**
+   Menjelaskan sumber panas bumi dan lapisan penyusunnya.
+
+3. **Scene 3 – Turbin**
+   Visualisasi turbin yang berputar dengan animasi 3D.
+
+4. **Scene 4 – Menara Pendingin**
+   Menampilkan proses pendinginan dan kondensasi uap.
+
+5. **Scene 5 – Penutup**
+   Tampilan sistem secara keseluruhan dengan pesan keberlanjutan energi.
 
 Setiap scene dilengkapi dengan:
 
-Narasi audio penjelasan (durasi maksimal 20 detik)
+* 🎧 Narasi audio penjelasan (maks. 20 detik)
+* 🎥 Posisi kamera yang optimal
+* 📘 Konten edukasi kontekstual
+* 🎞️ Animasi 3D untuk komponen penting
 
-Posisi kamera yang optimal
+---
 
-Konten edukasi yang relevan
+## 🚀 Cara Menggunakan
 
-Animasi 3D untuk komponen penting
+1. Buka file `index.html` melalui browser:
 
-Cara Menggunakan
-Buka file index.html di browser (Chrome untuk Android atau Safari untuk iOS)
+   * **Chrome (Android)**
+   * **Safari (iOS)**
+2. Izinkan akses kamera
+3. Arahkan kamera ke permukaan datar
+4. Pilih scene melalui menu navigasi
+5. Dengarkan narasi dan amati model 3D
+6. Gunakan tombol navigasi untuk berpindah scene
 
-Arahkan kamera ke permukaan datar
+---
 
-Pilih scene yang ingin dijelajahi dari menu
+## 🛠️ Teknologi yang Digunakan
 
-Dengarkan narasi dan amati model 3D dari berbagai sudut
+* **HTML5** – Struktur aplikasi
+* **JavaScript** – Logika dan interaksi
+* **A-Frame / AR.js** – Framework AR berbasis web
+* **WebXR API** – Dukungan AR di browser
+* **GLB (.glb)** – Format model 3D terkompresi
 
-Gunakan tombol navigasi untuk berpindah scene
+---
 
-Teknologi yang Digunakan
-HTML5 untuk struktur aplikasi
+## 🎯 Target Pengguna
 
-JavaScript dengan library AR (mungkin A-Frame atau AR.js)
+AR-Geothermal cocok digunakan oleh:
 
-Format GLB untuk model 3D
+* 🎓 Siswa dan mahasiswa
+* 🌍 Masyarakat umum
+* 👩‍🏫 Edukator dan pengajar sains
+* 💻 Pengembang yang tertarik pada AR edukasi
 
-WebXR API untuk pengalaman AR di browser
+---
 
-Untuk Siapa Aplikasi Ini?
-AR-Geothermal cocok untuk:
+## 📚 Konten Edukasi
 
-Siswa dan mahasiswa yang belajar tentang energi terbarukan
+Setiap scene menjelaskan aspek penting energi panas bumi, meliputi:
 
-Masyarakat umum yang ingin memahami energi panas bumi
+* Sumber panas dari dalam bumi
+* Proses ekstraksi uap panas
+* Konversi energi panas menjadi listrik
+* Sistem pendinginan dan daur ulang air
+* Keuntungan lingkungan energi panas bumi
 
-Edukator dan pengajar sains
+---
 
-Pengembang yang tertarik dengan teknologi AR edukasi
+## ⚙️ Performa & Kompatibilitas
 
-Konten Edukasi
-Setiap scene menjelaskan aspek berbeda dari energi panas bumi:
+Aplikasi dirancang ringan dan optimal untuk:
 
-Sumber panas dari inti bumi
+* 📱 Smartphone Android 8+ dan iOS 13+
+* 🌐 Browser yang mendukung WebXR
+* 📶 Koneksi internet standar (untuk loading awal)
 
-Proses ekstraksi uap panas
+Tidak memerlukan instalasi aplikasi tambahan.
 
-Konversi energi panas menjadi listrik
+---
 
-Sistem pendinginan dan daur ulang air
+## 🔮 Rencana Pengembangan
 
-Keuntungan lingkungan energi panas bumi
+Pengembangan selanjutnya meliputi:
 
-Performa dan Kompatibilitas
-Aplikasi dirancang ringan dan dapat berjalan di:
+* Penambahan scene sumur injeksi & reservoir
+* Interaksi lanjutan dengan objek 3D
+* Dukungan multi-bahasa
+* Kuis dan evaluasi pembelajaran
 
-Smartphone dengan iOS 13+ atau Android 8+
+---
 
-Browser yang mendukung WebXR
+## 🌱 Penutup
 
-Koneksi internet standar (untuk loading awal)
+**AR-Geothermal** dibuat untuk menjadikan pembelajaran energi bersih lebih menarik, interaktif, dan mudah dipahami melalui teknologi Realitas Augmented.
 
-Pengembangan ke Depan
-Rencana pengembangan mencakup:
+Dengan pendekatan visual dan edukatif, aplikasi ini diharapkan dapat meningkatkan kesadaran dan pemahaman tentang pentingnya energi terbarukan bagi masa depan.
 
-Penambahan scene tentang sumur injeksi dan reservoir
+---
 
-Interaksi lebih lanjut dengan model 3D
-
-Dukungan bahasa tambahan
-
-Kuis dan evaluasi pembelajaran
-
-AR-Geothermal dibuat untuk membuat pembelajaran tentang energi bersih menjadi lebih menarik dan interaktif melalui teknologi Realitas Augmented.
-
+📄 *Feel free to contribute, explore, and improve this project.*
