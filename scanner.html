@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Geothermal AR Scanner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+  <!-- AR.js -->
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .ui {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+      z-index: 10;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 20px;
+      background: #1976d2;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- UI -->
+  <div class="ui">
+    <button onclick="prevScene()">◀ Prev</button>
+    <button onclick="nextScene()">Next ▶</button>
+  </div>
+
+  <!-- AR SCENE -->
+  <a-scene
+    embedded
+    arjs="sourceType: webcam; debugUIEnabled: false;"
+    renderer="antialias: true; colorManagement: true;"
+    vr-mode-ui="enabled: false"
+  >
+
+    <!-- CAMERA -->
+    <a-entity camera></a-entity>
+
+    <!-- HIRO MARKER -->
+    <a-marker
+      preset="hiro"
+      id="hiro-marker"
+      emitevents="true"
+      smooth="true"
+      smoothCount="5"
+      smoothTolerance="0.01"
+      smoothThreshold="5"
+    >
+
+      <!-- MODEL -->
+      <a-entity
+        id="model"
+        gltf-model="assets/models/FullVersion.glb"
+        position="0 0 0"
+        scale="0.5 0.5 0.5"
+        rotation="0 0 0"
+      ></a-entity>
+
+    </a-marker>
+
+  </a-scene>
+
+  <!-- SCRIPT -->
+  <script>
+    /* ==========================
+       SCENE CONFIG
+    ========================== */
+
+    const SCENES = [
+      {
+        name: "Intro",
+        model: "assets/models/FullVersion.glb",
+        scale: "0.5 0.5 0.5",
+        rotation: "0 0 0",
+        animation: null,
+        audio: "assets/audio/Intro.mp3"
+      },
+      {
+        name: "Turbine",
+        model: "assets/models/Turbin_Fan.glb",
+        scale: "0.7 0.7 0.7",
+        rotation: "0 0 0",
+        animation:
+          "property: rotation; to: 0 360 0; loop: true; dur: 3000; easing: linear",
+        audio: "assets/audio/Turbine.mp3"
+      }
+    ];
+
+    let currentScene = 0;
+    const modelEl = document.getElementById("model");
+    const marker = document.getElementById("hiro-marker");
+    const audio = new Audio();
+
+    /* ==========================
+       MARKER EVENTS
+    ========================== */
+
+    marker.addEventListener("markerFound", () => {
+      console.log("✅ HIRO marker detected");
+      loadScene(currentScene);
+    });
+
+    marker.addEventListener("markerLost", () => {
+      console.log("❌ HIRO marker lost");
+      audio.pause();
+    });
+
+    /* ==========================
+       LOAD SCENE
+    ========================== */
+
+    function loadScene(index) {
+      const scene = SCENES[index];
+      console.log("📦 Load scene:", scene.name);
+
+      modelEl.setAttribute("gltf-model", scene.model);
+      modelEl.setAttribute("scale", scene.scale);
+      modelEl.setAttribute("rotation", scene.rotation);
+
+      if (scene.animation) {
+        modelEl.setAttribute("animation", scene.animation);
+      } else {
+        modelEl.removeAttribute("animation");
+      }
+
+      audio.src = scene.audio;
+      audio.play().catch(() => {});
+    }
+
+    /* ==========================
+       NAVIGATION
+    ========================== */
+
+    function nextScene() {
+      if (currentScene < SCENES.length - 1) {
+        currentScene++;
+        loadScene(currentScene);
+      }
+    }
+
+    function prevScene() {
+      if (currentScene > 0) {
+        currentScene--;
+        loadScene(currentScene);
+      }
+    }
+
+    /* ==========================
+       DEBUG
+    ========================== */
+
+    modelEl.addEventListener("model-loaded", () => {
+      console.log("✅ Model loaded successfully");
+    });
+
+    modelEl.addEventListener("model-error", (e) => {
+      console.error("❌ Model failed to load", e);
+    });
+  </script>
+
+</body>
+</html>
