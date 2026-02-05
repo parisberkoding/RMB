@@ -28,7 +28,7 @@ window.SCENE_CONFIG = [
                 path: "assets/FullVersion.glb",
                 position: { x: 0, y: 0.5, z: 0 },
                 rotation: { x: -90, y: 0, z: 0 },
-                scale: { x: 0.5, y: 0.5, z: 0.5 },
+                scale: { x: 0.3, y: 0.3, z: 0.3 },
                 animation: null
             }
         ],
@@ -56,7 +56,7 @@ window.SCENE_CONFIG = [
                 path: "assets/FullVersion.glb",
                 position: { x: 0, y: 0.5, z: 0 },
                 rotation: { x: -90, y: 0, z: 0 },
-                scale: { x: 0.5, y: 0.5, z: 0.5 },
+                scale: { x: 0.3, y: 0.3, z: 0.3 },
                 animation: null
             }
         ],
@@ -85,7 +85,7 @@ window.SCENE_CONFIG = [
                 path: "assets/FullVersion.glb",
                 position: { x: 0, y: 0.5, z: 0 },
                 rotation: { x: -90, y: 0, z: 0 },
-                scale: { x: 0.5, y: 0.5, z: 0.5 },
+                scale: { x: 0.3, y: 0.3, z: 0.3 },
                 animation: null
             },
             // Animated turbine fan (overlay di posisi yang sama)
@@ -94,7 +94,7 @@ window.SCENE_CONFIG = [
                 path: "assets/Turbine_Fan.glb",
                 position: { x: 0, y: 0.8, z: 0 },
                 rotation: { x: -90, y: 0, z: 0 },
-                scale: { x: 0.5, y: 0.5, z: 0.5 },
+                scale: { x: 0.3, y: 0.3, z: 0.3 },
                 
                 animation: {
                     type: "rotation",
@@ -127,7 +127,7 @@ window.SCENE_CONFIG = [
                 path: "assets/FullVersion.glb",
                 position: { x: 0, y: 0.5, z: 0 },
                 rotation: { x: -90, y: 0, z: 0 },
-                scale: { x: 0.5, y: 0.5, z: 0.5 },
+                scale: { x: 0.3, y: 0.3, z: 0.3 },
                 animation: null
             }
         ],
@@ -155,7 +155,7 @@ window.SCENE_CONFIG = [
                 path: "assets/FullVersion.glb",
                 position: { x: 0, y: 0.5, z: 0 },
                 rotation: { x: -90, y: 0, z: 0 },
-                scale: { x: 0.5, y: 0.5, z: 0.5 },
+                scale: { x: 0.2, y: 0.2, z: 0.2 },
                 animation: null
             },
             {
@@ -163,7 +163,7 @@ window.SCENE_CONFIG = [
                 path: "assets/Turbine_Fan.glb",
                 position: { x: 0, y: 0.8, z: 0 },
                 rotation: { x: -90, y: 0, z: 0 },
-                scale: { x: 0.5, y: 0.5, z: 0.5 },
+                scale: { x: 0.2, y: 0.2, z: 0.2 },
                 animation: {
                     type: "rotation",
                     axis: "y",
