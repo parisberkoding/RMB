@@ -1,25 +1,22 @@
 // =============================================================================
-// GEOTHERMAL AR - SCENE CONFIGURATION
+// GEOTHERMAL AR - SCENE CONFIGURATION (REFACTORED)
 // =============================================================================
-// This file defines all scenes in the AR experience.
-// Each scene contains:
-// - Unique ID and metadata (title, subtitle)
-// - Audio narration path
-// - 3D model components with transforms and animations
-// - Camera positioning for optimal viewing
+// Optimized for proper AR display on Hiro marker
+// - Scale adjusted to fit marker perfectly
+// - Rotation fixed so mantle stays at bottom
+// - Y-axis rotation for horizontal view changes
+// - Proper bird's eye view angles
 // =============================================================================
 
 window.SCENE_CONFIG = [
     // =========================================================================
-    // SCENE 1: INTRO / WELCOME - 2.5D Bird's Eye View (Surface Overview)
+    // SCENE 1: INTRO / WELCOME - 2.5D Bird's Eye View
     // =========================================================================
     {
         id: 1,
         title: "Welcome",
         subtitle: "Energi Bersih dari Perut Bumi",
-        // audio: "assets/audio/intro.mp3",
         
-        // Scene description for info card
         description: "Selamat datang di Geothermal AR! Energi panas bumi adalah sumber energi terbarukan yang dihasilkan dari panas alami bumi. Mari kita jelajahi bagaimana energi ini dimanfaatkan untuk menghasilkan listrik ramah lingkungan.",
         
         components: [
@@ -27,26 +24,25 @@ window.SCENE_CONFIG = [
                 name: "full-geothermal-plant",
                 path: "assets/FullVersion.glb",
                 position: { x: 0, y: 0, z: 0 },
-                rotation: { x: -45, y: 45, z: 0 },  // 2.5D bird's eye view - kiri kanan atas keliatan
-                scale: { x: 0.25, y: 0.25, z: 0.25 },
+                rotation: { x: 0, y: 0, z: 0 },  // Flat on marker, rotasi Y untuk horizontal
+                scale: { x: 0.15, y: 0.15, z: 0.15 },  // Lebih kecil agar fit
                 animation: null
             }
         ],
         
         camera: {
-            position: { x: 0, y: 2.5, z: 4 },  // Higher angle for 2.5D overview
+            position: { x: 0, y: 1.5, z: 3 },  // Bird's eye dari atas
             duration: 2000
         }
     },
     
     // =========================================================================
-    // SCENE 2: INJECTION WELL (Sisi Kanan - Rotasi 90,0,0)
+    // SCENE 2: INJECTION WELL (Sisi Kanan - Rotasi Y: 90)
     // =========================================================================
     {
         id: 2,
         title: "Injection Well",
         subtitle: "Pengembalian Air ke Reservoir",
-        // audio: "assets/audio/injection_well.mp3",
         
         description: "Injection Well terletak di sisi kanan sistem. Air yang telah digunakan dikembalikan ke reservoir panas bumi melalui sumur injeksi. Proses ini menjaga keseimbangan tekanan dan memastikan sumber panas bumi tetap berkelanjutan.",
         
@@ -55,26 +51,25 @@ window.SCENE_CONFIG = [
                 name: "full-geothermal-plant",
                 path: "assets/FullVersion.glb",
                 position: { x: 0, y: 0, z: 0 },
-                rotation: { x: 90, y: 0, z: 0 },  // Sisi kanan - Injection Well
-                scale: { x: 0.25, y: 0.25, z: 0.25 },
+                rotation: { x: 0, y: 90, z: 0 },  // Rotasi Y 90° untuk sisi kanan
+                scale: { x: 0.15, y: 0.15, z: 0.15 },
                 animation: null
             }
         ],
         
         camera: {
-            position: { x: 2, y: 0, z: 2.5 },  // Focus ke sisi kanan
+            position: { x: 1.5, y: 0.8, z: 2 },  // View dari kanan
             duration: 2000
         }
     },
     
     // =========================================================================
-    // SCENE 3: PRODUCTION WELL (Sisi Kiri - Rotasi -90,0,0 atau 270,0,0)
+    // SCENE 3: PRODUCTION WELL (Sisi Kiri - Rotasi Y: -90 atau 270)
     // =========================================================================
     {
         id: 3,
         title: "Production Well",
         subtitle: "Pengambilan Uap Panas Bumi",
-        // audio: "assets/audio/production_well.mp3",
         
         description: "Production Well terletak di sisi kiri sistem. Di kedalaman bumi terdapat reservoir panas dengan suhu 150-350°C. Uap panas bertekanan tinggi naik melalui sumur produksi untuk menggerakkan turbin pembangkit listrik.",
         
@@ -83,26 +78,52 @@ window.SCENE_CONFIG = [
                 name: "full-geothermal-plant",
                 path: "assets/FullVersion.glb",
                 position: { x: 0, y: 0, z: 0 },
-                rotation: { x: -90, y: 0, z: 0 },  // Sisi kiri - Production Well
-                scale: { x: 0.25, y: 0.25, z: 0.25 },
+                rotation: { x: 0, y: -90, z: 0 },  // Rotasi Y -90° untuk sisi kiri
+                scale: { x: 0.15, y: 0.15, z: 0.15 },
                 animation: null
             }
         ],
         
         camera: {
-            position: { x: -2, y: 0, z: 2.5 },  // Focus ke sisi kiri
+            position: { x: -1.5, y: 0.8, z: 2 },  // View dari kiri
             duration: 2000
         }
     },
     
     // =========================================================================
-    // SCENE 4: TURBINE WITH ANIMATION - 2.5D Bird's Eye View
+    // SCENE 4: EARTH LAYERS (Mantle di Bawah - Rotasi Y: 180)
     // =========================================================================
     {
         id: 4,
+        title: "Lapisan Bumi",
+        subtitle: "Dapur Panas di Perut Bumi",
+        
+        description: "Di kedalaman bumi terdapat lapisan-lapisan dengan suhu sangat tinggi. Kerak bumi, mantel, dan inti bumi menghasilkan panas luar biasa. Suhu inti bumi mencapai 5000°C - lebih panas dari permukaan matahari!",
+        
+        components: [
+            {
+                name: "full-geothermal-plant",
+                path: "assets/FullVersion.glb",
+                position: { x: 0, y: 0, z: 0 },
+                rotation: { x: 0, y: 180, z: 0 },  // Rotasi Y 180° untuk lihat mantle
+                scale: { x: 0.15, y: 0.15, z: 0.15 },
+                animation: null
+            }
+        ],
+        
+        camera: {
+            position: { x: 0, y: 0.5, z: 2.5 },  // Close-up ke earth layers
+            duration: 2000
+        }
+    },
+    
+    // =========================================================================
+    // SCENE 5: TURBINE WITH ANIMATION - Bird's Eye View
+    // =========================================================================
+    {
+        id: 5,
         title: "Turbin Pembangkit",
         subtitle: "Mengubah Uap Menjadi Listrik",
-        // audio: "assets/audio/turbine.mp3",
         
         description: "Uap panas bumi bertekanan tinggi menggerakkan bilah turbin dengan kecepatan tinggi. Putaran turbin menggerakkan generator yang mengubah energi kinetik menjadi energi listrik. Satu turbin dapat menghasilkan hingga 100 megawatt listrik!",
         
@@ -112,17 +133,17 @@ window.SCENE_CONFIG = [
                 name: "full-geothermal-plant",
                 path: "assets/FullVersion.glb",
                 position: { x: 0, y: 0, z: 0 },
-                rotation: { x: -45, y: 45, z: 0 },  // 2.5D bird's eye view - pembangkitan surface
-                scale: { x: 0.25, y: 0.25, z: 0.25 },
+                rotation: { x: 0, y: 45, z: 0 },  // Rotasi Y 45° untuk diagonal view
+                scale: { x: 0.15, y: 0.15, z: 0.15 },
                 animation: null
             },
-            // Animated turbine fan (overlay di posisi yang sama)
+            // Animated turbine fan
             {
                 name: "turbine-fan-animated",
                 path: "assets/Turbine_Fan.glb",
-                position: { x: 0, y: 0.3, z: 0 },
-                rotation: { x: -45, y: 45, z: 0 },
-                scale: { x: 0.25, y: 0.25, z: 0.25 },
+                position: { x: 0, y: 0.2, z: 0 },  // Slightly above base
+                rotation: { x: 0, y: 45, z: 0 },
+                scale: { x: 0.15, y: 0.15, z: 0.15 },
                 
                 animation: {
                     type: "rotation",
@@ -133,19 +154,18 @@ window.SCENE_CONFIG = [
         ],
         
         camera: {
-            position: { x: 0, y: 2, z: 3 },  // 2.5D angle untuk lihat turbin berputar
+            position: { x: 0, y: 1.5, z: 2.5 },  // 2.5D angle untuk lihat turbin
             duration: 2000
         }
     },
     
     // =========================================================================
-    // SCENE 5: COOLING TOWER - 2.5D Bird's Eye View
+    // SCENE 6: COOLING TOWER - Bird's Eye View
     // =========================================================================
     {
-        id: 5,
+        id: 6,
         title: "Menara Pendingin",
         subtitle: "Sistem Pendingin & Kondensasi",
-        // audio: "assets/audio/cooling_tower.mp3",
         
         description: "Setelah melewati turbin, uap panas perlu didinginkan agar dapat digunakan kembali. Cooling tower menggunakan udara alami untuk mengondensasi uap menjadi air. Sistem ini memastikan tidak ada limbah dan menciptakan siklus tertutup yang ramah lingkungan.",
         
@@ -154,26 +174,25 @@ window.SCENE_CONFIG = [
                 name: "full-geothermal-plant",
                 path: "assets/FullVersion.glb",
                 position: { x: 0, y: 0, z: 0 },
-                rotation: { x: -45, y: 135, z: 0 },  // 2.5D view dengan angle berbeda untuk cooling tower
-                scale: { x: 0.25, y: 0.25, z: 0.25 },
+                rotation: { x: 0, y: -45, z: 0 },  // Rotasi Y -45° untuk angle cooling tower
+                scale: { x: 0.15, y: 0.15, z: 0.15 },
                 animation: null
             }
         ],
         
         camera: {
-            position: { x: 1.5, y: 2, z: 3 },  // 2.5D angle ke cooling tower
+            position: { x: 1, y: 1.2, z: 2.5 },  // 2.5D angle ke cooling tower
             duration: 2000
         }
     },
     
     // =========================================================================
-    // SCENE 6: OUTRO - FULL CYCLE VIEW dengan Animasi
+    // SCENE 7: OUTRO - FULL CYCLE dengan Rotasi Slow
     // =========================================================================
     {
-        id: 6,
+        id: 7,
         title: "Masa Depan Hijau",
         subtitle: "Energi Berkelanjutan untuk Generasi Mendatang",
-        // audio: "assets/audio/outro.mp3",
         
         description: "Pembangkit listrik tenaga panas bumi adalah solusi energi bersih masa depan. Tanpa emisi karbon, tersedia 24/7, dan tidak bergantung cuaca. Indonesia memiliki 40% potensi panas bumi dunia - saatnya memanfaatkan energi dari perut bumi untuk masa depan berkelanjutan!",
         
@@ -182,26 +201,26 @@ window.SCENE_CONFIG = [
                 name: "full-geothermal-plant",
                 path: "assets/FullVersion.glb",
                 position: { x: 0, y: 0, z: 0 },
-                rotation: { x: -45, y: 45, z: 0 },  // 2.5D bird's eye view final
-                scale: { x: 0.25, y: 0.25, z: 0.25 },
+                rotation: { x: 0, y: 0, z: 0 },  // Back to front view
+                scale: { x: 0.15, y: 0.15, z: 0.15 },
                 animation: null
             },
             {
                 name: "turbine-fan-animated",
                 path: "assets/Turbine_Fan.glb",
-                position: { x: 0, y: 0.3, z: 0 },
-                rotation: { x: -45, y: 45, z: 0 },
-                scale: { x: 0.25, y: 0.25, z: 0.25 },
+                position: { x: 0, y: 0.2, z: 0 },
+                rotation: { x: 0, y: 0, z: 0 },
+                scale: { x: 0.15, y: 0.15, z: 0.15 },
                 animation: {
                     type: "rotation",
                     axis: "y",
-                    speed: 2.0
+                    speed: 1.5  // Slower rotation for finale
                 }
             }
         ],
         
         camera: {
-            position: { x: 0, y: 3, z: 5 },  // Wide 2.5D shot untuk lihat keseluruhan
+            position: { x: 0, y: 2, z: 4 },  // Wide bird's eye shot
             duration: 3000
         }
     }
@@ -213,8 +232,6 @@ window.SCENE_CONFIG = [
 
 /**
  * Get scene by ID
- * @param {number} id - Scene ID
- * @returns {object|null} Scene configuration object
  */
 window.getSceneById = function(id) {
     return window.SCENE_CONFIG.find(scene => scene.id === id) || null;
@@ -222,7 +239,6 @@ window.getSceneById = function(id) {
 
 /**
  * Get total number of scenes
- * @returns {number} Total scene count
  */
 window.getTotalScenes = function() {
     return window.SCENE_CONFIG.length;
@@ -230,8 +246,6 @@ window.getTotalScenes = function() {
 
 /**
  * Validate scene configuration
- * Checks if all required fields are present
- * @returns {boolean} True if configuration is valid
  */
 window.validateSceneConfig = function() {
     const requiredFields = ['id', 'title', 'subtitle', 'components', 'camera'];
@@ -252,7 +266,7 @@ window.validateSceneConfig = function() {
     return true;
 };
 
-// Auto-validate on load (development only)
+// Auto-validate on load
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     window.validateSceneConfig();
 }
